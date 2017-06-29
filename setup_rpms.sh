@@ -25,6 +25,7 @@ if [ `echo $ISOLCPUS | awk /'^0,'/` ]
     then
     ISOLCPUS=`echo $ISOLCPUS | cut -c 3-`
 fi
+echo $ISOLCPUS
 
 yum install -y wget nano ftp yum-utils git tuna sysstat
 
