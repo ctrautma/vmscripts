@@ -21,7 +21,7 @@ rpm -ivh http://$SERVER/brewroot/packages/driverctl/0.95/1.el7fdparch/noarch/dri
 # Isolated CPU list
 ISOLCPUS=`lscpu | grep "NUMA node0" | awk '{print $4}'`
 
-if [ `echo $ISOLCPUS | awk /'^0,'/` ]
+if [ `echo $ISOLCPUS | awk /'^0,|^0-'/` ]
     then
     ISOLCPUS=`echo $ISOLCPUS | cut -c 3-`
 fi
