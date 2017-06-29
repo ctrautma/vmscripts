@@ -27,13 +27,10 @@ if [ `echo $ISOLCPUS | awk /'^0,'/` ]
 fi
 echo $ISOLCPUS
 
-yum install -y wget nano ftp yum-utils git tuna sysstat
-
 sed -i 's/\(GRUB_CMDLINE_LINUX.*\)"$/\1/g' /etc/default/grub
 sed -i "s/GRUB_CMDLINE_LINUX.*/& default_hugepagesz=1G hugepagesz=1G\"/g" /etc/default/grub
 echo -e "isolated_cores=$ISOLCPUS" >> /etc/tuned/cpu-partitioning-variables.conf
 sed -i "s/GRUB_TERMINAL=\"serial console\"/GRUB_TERMINAL=\"console\"/" /etc/default/grub
-tuned-adm profile cpu-partitioning
 grub2-mkconfig -o /boot/grub2/grub.cfg
-
-reboot
+systemctl start tuned
+tuned-adm profile cpu-partitioning
