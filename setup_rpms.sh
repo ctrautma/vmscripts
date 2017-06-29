@@ -3,11 +3,11 @@ set -x
 mkdir -P /root/dpdkrpms/1705 /root/dpdkrpms/1611-2 /root/tuned/28 /root/tuned/27
 SERVER="download-node-02.eng.bos.redhat.com"
 wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-2.7.1-5.el7fdb.noarch.rpm -P /root/tuned/27/.
-wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-profiles-cpu-partitioning-2.7.1-5.el7fdb.noarch.rpm -P /root/tuned27/.
-wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-profiles-nfv-2.7.1-5.el7fdb.noarch.rpm -P /root/tuned27/.
+wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-profiles-cpu-partitioning-2.7.1-5.el7fdb.noarch.rpm -P /root/tuned/27/.
+wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-profiles-nfv-2.7.1-5.el7fdb.noarch.rpm -P /root/tuned/27/.
 wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-profiles-realtime-2.7.1-5.el7fdb.noarch.rpm -P /root/tuned/27/.
 wget http://$SERVER/brewroot/packages/tuned/2.8.0/2.el7fdp/noarch/tuned-2.8.0-2.el7fdp.noarch.rpm -P /root/tuned/28/.
-wget http://$SERVER/brewroot/packages/tuned/2.8.0/2.el7fdp/noarch/tuned-profiles-cpu-partitioning-2.8.0-2.el7fdp.noarch.rpm -P /root/tuned28/.
+wget http://$SERVER/brewroot/packages/tuned/2.8.0/2.el7fdp/noarch/tuned-profiles-cpu-partitioning-2.8.0-2.el7fdp.noarch.rpm -P /root/tuned/28/.
 wget http://$SERVER/brewroot/packages/dpdk/17.05/2.el7fdb/x86_64/dpdk-17.05-2.el7fdb.x86_64.rpm -P /root/dpdkrpms/1705/.
 wget http://$SERVER/brewroot/packages/dpdk/17.05/2.el7fdb/x86_64/dpdk-tools-17.05-2.el7fdb.x86_64.rpm -P /root/dpdkrpms/1705/.
 wget http://$SERVER/brewroot/packages/dpdk/16.11.2/4.el7/x86_64/dpdk-16.11.2-4.el7.x86_64.rpm -P /root/dpdkrpms/1611-2/.
@@ -31,7 +31,7 @@ yum install -y wget nano ftp yum-utils git tuna sysstat
 sed -i 's/\(GRUB_CMDLINE_LINUX.*\)"$/\1/g' /etc/default/grub
 sed -i "s/GRUB_CMDLINE_LINUX.*/& default_hugepagesz=1G hugepagesz=1G\"/g" /etc/default/grub
 echo -e "isolated_cores=$ISOLCPUS" >> /etc/tuned/cpu-partitioning-variables.conf
-sed -i s/GRUB_TERMINAL=\"serial console\"/GRUB_TERMINAL=\"console\"/ /etc/default/grub
+sed -i "s/GRUB_TERMINAL=\"serial console\"/GRUB_TERMINAL=\"console\"/" /etc/default/grub
 tuned-adm profile cpu-partitioning
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
