@@ -21,16 +21,20 @@ rpm -ivh http://$SERVER/brewroot/packages/driverctl/0.95/1.el7fdparch/noarch/dri
 # Isolated CPU list
 ISOLCPUS=`lscpu | grep "NUMA node0" | awk '{print $4}'`
 
-if [ `echo $ISOLCPUS | awk /'^0,|^0-'/` ]
+if [ `echo $ISOLCPUS | awk /'^0,'/` ]
     then
     ISOLCPUS=`echo $ISOLCPUS | cut -c 3-`
+elif [ `echo $ISOLCPUS | awk /'^0-'/` ]
+    then
+    ISOLCPUS=`echo $ISOLCPUS | sed s/'^0-'/'1-'/`
 fi
 echo $ISOLCPUS
 
 sed -i 's/\(GRUB_CMDLINE_LINUX.*\)"$/\1/g' /etc/default/grub
-sed -i "s/GRUB_CMDLINE_LINUX.*/& default_hugepagesz=1G hugepagesz=1G\"/g" /etc/default/grub
+sed -i "s/GRUB_CMDLINE_LINUX.*/& default_hugepagesz=1G hugepagesz=1G nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup\"/g" /etc/default/grub
 echo -e "isolated_cores=$ISOLCPUS" >> /etc/tuned/cpu-partitioning-variables.conf
 sed -i "s/GRUB_TERMINAL=\"serial console\"/GRUB_TERMINAL=\"console\"/" /etc/default/grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
 systemctl start tuned
+sleep 10
 tuned-adm profile cpu-partitioning
