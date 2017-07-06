@@ -2,8 +2,8 @@
 
 set -x
 
-NIC1=eth0
-NIC2=eth1
+NIC1=eth1
+NIC2=eth2
 
 NIC1_PCI_ADDR=`ethtool -i $NIC1 | grep -Eo '[0-9]+:[0-9]+:[0-9]+\.[0-9]+'`
 NIC2_PCI_ADDR=`ethtool -i $NIC2 | grep -Eo '[0-9]+:[0-9]+:[0-9]+\.[0-9]+'`
