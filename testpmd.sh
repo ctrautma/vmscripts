@@ -7,6 +7,7 @@ DESCRIPTORS=2048
 MEMORY="1024"
 FORWARD="IO"
 AUTOSTART="--auto-start"
+NICS=""
 
 progname=$0
 
