@@ -1,6 +1,6 @@
 set -x
 
-source ~/viommu_setting.txt
+source /tmp/viommu_setting.txt
 
 mkdir -P /root/dpdkrpms/1705 /root/dpdkrpms/1611-2 /root/tuned/28 /root/tuned/27
 SERVER="download-node-02.eng.bos.redhat.com"
