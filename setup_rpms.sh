@@ -1,6 +1,27 @@
 set -x
 
-source /root/viommu_setting.txt
+VIOMMU="NO"
+
+progname=$0
+
+function usage () {
+   cat <<EOF
+Usage: $progname [-v enable viommu]
+EOF
+   exit 0
+}
+
+while getopts hv FLAG; do
+   case $FLAG in
+
+   v)  echo "VIOMMU is enabled"
+       VIOMMU="YES";;
+   h)  echo "found $opt" ; usage ;;
+   \?)  usage ;;
+   esac
+done
+
+shift $(($OPTIND - 1))
 
 mkdir -P /root/dpdkrpms/1705 /root/dpdkrpms/1611-2 /root/tuned/28 /root/tuned/27
 SERVER="download-node-02.eng.bos.redhat.com"
@@ -33,9 +54,9 @@ fi
 echo $ISOLCPUS
 
 sed -i 's/\(GRUB_CMDLINE_LINUX.*\)"$/\1/g' /etc/default/grub
-if [ "$VIOMMU_SETTING" == "NO" ]; then
+if [ "$VIOMMU" == "NO" ]; then
     sed -i "s/GRUB_CMDLINE_LINUX.*/& default_hugepagesz=1G hugepagesz=1G nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup\"/g" /etc/default/grub
-elif [ "$VIOMMU_SETTING" == "YES" ]; then
+elif [ "$VIOMMU" == "YES" ]; then
     sed -i "s/GRUB_CMDLINE_LINUX.*/& default_hugepagesz=1G hugepagesz=1G intel_iommu=on nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup\"/g" /etc/default/grub
 fi
 
