@@ -35,8 +35,8 @@ wget http://$SERVER/brewroot/packages/dpdk/17.05/2.el7fdb/x86_64/dpdk-17.05-2.el
 wget http://$SERVER/brewroot/packages/dpdk/17.05/2.el7fdb/x86_64/dpdk-tools-17.05-2.el7fdb.x86_64.rpm -P /root/dpdkrpms/1705/.
 wget http://$SERVER/brewroot/packages/dpdk/16.11.2/4.el7/x86_64/dpdk-16.11.2-4.el7.x86_64.rpm -P /root/dpdkrpms/1611-2/.
 wget http://$SERVER/brewroot/packages/dpdk/16.11.2/4.el7/x86_64/dpdk-tools-16.11.2-4.el7.x86_64.rpm -P /root/dpdkrpms/1611-2/.
-wget http://$SERVER/brewroot/packages/dpdk/17.11/2.el7fdb/x86_64/dpdk-17.11-2.el7fdb.x86_64.rpm ~P /root/dpdkrpms/1711/.
-wget http://$SERVER/brewroot/packages/dpdk/17.11/2.el7fdb/x86_64/dpdk-tools-17.11-2.el7fdb.x86_64.rpm ~P /root/dpdkrpms/1711/.
+wget http://$SERVER/brewroot/packages/dpdk/17.11/2.el7fdb/x86_64/dpdk-17.11-2.el7fdb.x86_64.rpm -P /root/dpdkrpms/1711/.
+wget http://$SERVER/brewroot/packages/dpdk/17.11/2.el7fdb/x86_64/dpdk-tools-17.11-2.el7fdb.x86_64.rpm -P /root/dpdkrpms/1711/.
 
 yum install -y /root/tuned/28/tuned-2.8.0-2.el7fdp.noarch.rpm
 yum install -y /root/tuned/28/tuned-profiles-cpu-partitioning-2.8.0-2.el7fdp.noarch.rpm
