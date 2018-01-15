@@ -40,8 +40,16 @@ wget http://$SERVER/brewroot/packages/dpdk/16.11.2/4.el7/x86_64/dpdk-tools-16.11
 wget http://$SERVER/brewroot/packages/dpdk/17.11/2.el7fdb/x86_64/dpdk-17.11-2.el7fdb.x86_64.rpm -P /root/dpdkrpms/1711/.
 wget http://$SERVER/brewroot/packages/dpdk/17.11/2.el7fdb/x86_64/dpdk-tools-17.11-2.el7fdb.x86_64.rpm -P /root/dpdkrpms/1711/.
 
-yum install -y /root/tuned/28/tuned-2.8.0-2.el7fdp.noarch.rpm
-yum install -y /root/tuned/28/tuned-profiles-cpu-partitioning-2.8.0-2.el7fdp.noarch.rpm
+# Detect OS name and version from systemd based os-release file
+. /etc/os-release
+
+if [ $VERSION_ID == "7.4" ] || [ $VERSION_ID == "7.3" ]
+then
+    rpm -Uvh /root/tuned/28/tuned-2.8.0-2.el7fdp.noarch.rpm
+    rpm -ivh /root/tuned/28/tuned-profiles-cpu-partitioning-2.8.0-2.el7fdp.noarch.rpm
+else
+    yum install -y tuned-profiles-cpu-partitioning
+fi
 
 rpm -ivh http://$SERVER/brewroot/packages/driverctl/0.95/1.el7fdparch/noarch/driverctl-0.95-1.el7fdparch.noarch.rpm
 
