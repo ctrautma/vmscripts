@@ -25,6 +25,25 @@ shift $(($OPTIND - 1))
 
 yum install libibverbs -y
 
+yum install -y nmap-ncat tcpdump
+
+# netperf & iperf
+yum install -y gcc-c++ make gcc
+
+netperf=netperf-2.6.0
+wget http://lacrosse.corp.redhat.com/~haliu/${netperf}.tar.gz -O /tmp/${netperf}.tar.gz
+tar zxvf /tmp/${netperf}.tar.gz
+pushd ${netperf}
+./configure && make && make install
+popd
+
+IPERF_FILE="iperf-2.0.5.tar.gz"
+wget http://lacrosse.corp.redhat.com/~haliu/${IPERF_FILE}
+tar xf ${IPERF_FILE}
+BUILD_DIR="${IPERF_FILE%.tar.gz}"
+cd ${BUILD_DIR}
+./configure && make && make install
+
 mkdir -P /root/dpdkrpms/1705 /root/dpdkrpms/1611-2 /root/tuned/28 /root/tuned/27 /root/dpdkrpms/1711 /root/dpdkrpms/1611-4
 SERVER="download-node-02.eng.bos.redhat.com"
 wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-2.7.1-5.el7fdb.noarch.rpm -P /root/tuned/27/.
