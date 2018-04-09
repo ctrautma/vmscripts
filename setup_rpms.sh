@@ -1,6 +1,7 @@
 set -x
 
 VIOMMU="NO"
+DPDK_BUILD="NO"
 
 progname=$0
 
@@ -11,11 +12,13 @@ EOF
    exit 0
 }
 
-while getopts hv FLAG; do
+while getopts hvu FLAG; do
    case $FLAG in
 
    v)  echo "VIOMMU is enabled"
        VIOMMU="YES";;
+   u)  echo "Building upstream DPDK"
+       DPDK_BUILD="YES";;
    h)  echo "found $opt" ; usage ;;
    \?)  usage ;;
    esac
@@ -70,14 +73,17 @@ wget http://$SERVER/brewroot/packages/dpdk/16.11/4.el7fdp/x86_64/dpdk-tools-16.1
 wget http://$SERVER/brewroot/packages/dpdk/17.11/8.el7fdb/x86_64/dpdk-17.11-8.el7fdb.x86_64.rpm -P /root/dpdkrpms/1711-8/.
 wget http://$SERVER/brewroot/packages/dpdk/17.11/8.el7fdb/x86_64/dpdk-tools-17.11-8.el7fdb.x86_64.rpm -P /root/dpdkrpms/1711-8/.
 
-# install upstream dpdk version
-DPDK_VER="v17.11"
-yum install kernel-devel numactl-devel
-cd ~
-git clone git://dpdk.org/dpdk
-cd dpdk
-export RTE_TARGET=x86_64-native-linuxapp-gcc
-make install T=$RTE_TARGET
+if [ "$DPDK_BUILD" == "YES" ]; then
+    # install upstream dpdk version
+    DPDK_VER="v17.11"
+    yum install kernel-devel numactl-devel git
+    cd ~
+    git clone git://dpdk.org/dpdk
+    cd dpdk
+    export RTE_TARGET=x86_64-native-linuxapp-gcc
+    make install T=$RTE_TARGET
+    cd \
+fi
 
 # Detect OS name and version from systemd based os-release file
 . /etc/os-release
