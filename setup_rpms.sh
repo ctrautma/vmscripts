@@ -76,9 +76,9 @@ wget http://$SERVER/brewroot/packages/dpdk/17.11/8.el7fdb/x86_64/dpdk-tools-17.1
 if [ "$DPDK_BUILD" == "YES" ]
 then
     # install upstream dpdk version
-    DPDK_VER="v17.11"
+    DPDK_VER="master"
     yum install -y kernel-devel numactl-devel git
-    cd ~
+    cd /root
     git clone git://dpdk.org/dpdk
     cd dpdk
     git checkout $DPDK_VER
