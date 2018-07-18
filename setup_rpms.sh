@@ -37,6 +37,8 @@ netperf=netperf-2.6.0
 wget http://lacrosse.corp.redhat.com/~haliu/${netperf}.tar.gz -O /tmp/${netperf}.tar.gz
 tar zxvf /tmp/${netperf}.tar.gz
 pushd ${netperf}
+# add support for IBM new system arch ppc64le
+sed -i "/ppc64/i\ppc64le:Linux:*:*)\n\ echo powerpc64le-unknown-linux-gnu\n\ exit ;;" config.guess
 ./configure && make && make install
 popd
 
@@ -45,6 +47,8 @@ wget http://lacrosse.corp.redhat.com/~haliu/${IPERF_FILE}
 tar xf ${IPERF_FILE}
 BUILD_DIR="${IPERF_FILE%.tar.gz}"
 cd ${BUILD_DIR}
+# add support for IBM new system arch ppc64le
+sed -i "/ppc64/i\ppc64le:Linux:*:*)\n\ echo powerpc64le-unknown-linux-gnu\n\ exit ;;" config.guess
 ./configure && make && make install
 
 rm -f ${IPERF_FILE}
