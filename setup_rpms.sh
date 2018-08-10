@@ -52,7 +52,7 @@ rm -Rf IPERF*
 rm -f ${netperf}.tar.gz
 rm -Rf netperf*
 
-mkdir -P /root/dpdkrpms/1705 /root/dpdkrpms/1611-2 /root/tuned/28 /root/tuned/27 /root/dpdkrpms/1711 /root/dpdkrpms/1611-4 /root/dpdkrpms/1711-8 /root/dpdkrpms/1711-9
+mkdir -P /root/dpdkrpms/1705 /root/dpdkrpms/1611-2 /root/tuned/28 /root/tuned/27 /root/dpdkrpms/1711 /root/dpdkrpms/1611-4 /root/dpdkrpms/1711-8 /root/dpdkrpms/1711-9 /root/dpdkrpms/1711-13
 SERVER="download-node-02.eng.bos.redhat.com"
 wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-2.7.1-5.el7fdb.noarch.rpm -P /root/tuned/27/.
 wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-profiles-cpu-partitioning-2.7.1-5.el7fdb.noarch.rpm -P /root/tuned/27/.
@@ -72,6 +72,8 @@ wget http://$SERVER/brewroot/packages/dpdk/16.11/4.el7fdp/x86_64/dpdk-16.11-4.el
 wget http://$SERVER/brewroot/packages/dpdk/16.11/4.el7fdp/x86_64/dpdk-tools-16.11-4.el7fdp.x86_64.rpm -P /root/dpdkrpms/1611-4/.
 wget http://$SERVER/brewroot/packages/dpdk/17.11/8.el7fdb/x86_64/dpdk-17.11-8.el7fdb.x86_64.rpm -P /root/dpdkrpms/1711-8/.
 wget http://$SERVER/brewroot/packages/dpdk/17.11/8.el7fdb/x86_64/dpdk-tools-17.11-8.el7fdb.x86_64.rpm -P /root/dpdkrpms/1711-8/.
+wget http://$SERVER/brewroot/packages/dpdk/17.11/13.el7/x86_64/dpdk-17.11-13.el7.x86_64.rpm -P /root/dpdkrpms/1711-13/.
+wget http://$SERVER/brewroot/packages/dpdk/17.11/13.el7/x86_64/dpdk-tools-17.11-13.el7.x86_64.rpm -P /root/dpdkrpms/1711-13/.
 
 if [ "$DPDK_BUILD" == "YES" ]
 then
