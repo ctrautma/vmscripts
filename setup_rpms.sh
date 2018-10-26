@@ -33,6 +33,9 @@ yum install -y nmap-ncat tcpdump
 # netperf & iperf
 yum install -y gcc-c++ make gcc
 
+# install python2 for dpdk bonding
+yum -y install python
+
 netperf=netperf-2.6.0
 wget http://lacrosse.corp.redhat.com/~haliu/${netperf}.tar.gz -O /tmp/${netperf}.tar.gz
 tar zxvf /tmp/${netperf}.tar.gz
