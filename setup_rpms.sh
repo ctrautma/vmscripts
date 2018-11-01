@@ -81,6 +81,9 @@ wget http://$SERVER/brewroot/packages/dpdk/17.11/8.el7fdb/x86_64/dpdk-17.11-8.el
 wget http://$SERVER/brewroot/packages/dpdk/17.11/8.el7fdb/x86_64/dpdk-tools-17.11-8.el7fdb.x86_64.rpm -P /root/dpdkrpms/1711-8/.
 wget http://$SERVER/brewroot/packages/dpdk/17.11/13.el7/x86_64/dpdk-17.11-13.el7.x86_64.rpm -P /root/dpdkrpms/1711-13/.
 wget http://$SERVER/brewroot/packages/dpdk/17.11/13.el7/x86_64/dpdk-tools-17.11-13.el7.x86_64.rpm -P /root/dpdkrpms/1711-13/.
+#Here for rhel8 package
+mkdir -P /root/dpdkrpms/1711-14
+wget http://$SERVER/brewroot/packages/dpdk/17.11/14.el8/x86_64/dpdk-17.11-14.el8.x86_64.rpm -P /root/dpdkrpms/1711-14/.
 
 if [ "$DPDK_BUILD" == "YES" ]
 then
