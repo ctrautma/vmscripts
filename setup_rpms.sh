@@ -91,6 +91,9 @@ wget http://$SERVER/brewroot/packages/dpdk/17.11/15.el7/x86_64/dpdk-tools-17.11-
 mkdir -P /root/dpdkrpms/1811-2
 wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el7_6/x86_64/dpdk-18.11-2.el7_6.x86_64.rpm -P /root/dpdkrpms/1811-2/.
 wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el7_6/x86_64/dpdk-tools-18.11-2.el7_6.x86_64.rpm -P /root/dpdkrpms/1811-2/.
+mkdir -P /root/dpdkrpms/el8-1811-2
+wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el8/x86_64/dpdk-18.11-2.el8.x86_64.rpm -P /root/dpdkrpms/el8-1811-2/.
+wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el8/x86_64/dpdk-tools-18.11-2.el8.x86_64.rpm -P /root/dpdkrpms/el8-1811-2/.
 
 if [ "$DPDK_BUILD" == "YES" ]
 then
