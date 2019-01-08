@@ -59,8 +59,8 @@ rm -Rf IPERF*
 rm -f ${netperf}.tar.gz
 rm -Rf netperf*
 
-#mkdir -P /root/dpdkrpms/1705 /root/dpdkrpms/1611-2 /root/tuned/28 /root/tuned/27 /root/dpdkrpms/1711 /root/dpdkrpms/1611-4 /root/dpdkrpms/1711-8 /root/dpdkrpms/1711-9 /root/dpdkrpms/1711-13
-#mkdir -P /root/dpdkrpms/1705 /root/dpdkrpms/1611-2 /root/tuned/28 /root/tuned/27 /root/dpdkrpms/1711 /root/dpdkrpms/1611-4 /root/dpdkrpms/1711-8 /root/dpdkrpms/1711-9 /root/dpdkrpms/1711-13
+#mkdir -p /root/dpdkrpms/1705 /root/dpdkrpms/1611-2 /root/tuned/28 /root/tuned/27 /root/dpdkrpms/1711 /root/dpdkrpms/1611-4 /root/dpdkrpms/1711-8 /root/dpdkrpms/1711-9 /root/dpdkrpms/1711-13
+#mkdir -p /root/dpdkrpms/1705 /root/dpdkrpms/1611-2 /root/tuned/28 /root/tuned/27 /root/dpdkrpms/1711 /root/dpdkrpms/1611-4 /root/dpdkrpms/1711-8 /root/dpdkrpms/1711-9 /root/dpdkrpms/1711-13
 SERVER="download-node-02.eng.bos.redhat.com"
 wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-2.7.1-5.el7fdb.noarch.rpm -P /root/tuned/27/.
 wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-profiles-cpu-partitioning-2.7.1-5.el7fdb.noarch.rpm -P /root/tuned/27/.
@@ -86,7 +86,7 @@ wget http://$SERVER/brewroot/packages/tuned/2.8.0/2.el7fdp/noarch/tuned-profiles
 # mkdir -P /root/dpdkrpms/1711-14
 # wget http://$SERVER/brewroot/packages/dpdk/17.11/14.el8/x86_64/dpdk-17.11-14.el8.x86_64.rpm -P /root/dpdkrpms/1711-14/.
 # wget http://$SERVER/brewroot/packages/dpdk/17.11/14.el8/x86_64/dpdk-tools-17.11-14.el8.x86_64.rpm -P /root/dpdkrpms/1711-14/.
-mkdir -P /root/dpdkrpms/1711-15
+mkdir -p /root/dpdkrpms/1711-15
 wget http://$SERVER/brewroot/packages/dpdk/17.11/15.el7/x86_64/dpdk-17.11-15.el7.x86_64.rpm -P /root/dpdkrpms/1711-15/.
 wget http://$SERVER/brewroot/packages/dpdk/17.11/15.el7/x86_64/dpdk-tools-17.11-15.el7.x86_64.rpm -P /root/dpdkrpms/1711-15/.
 # mkdir -P /root/dpdkrpms/1811-2
