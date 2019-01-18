@@ -67,9 +67,14 @@ wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-profiles
 wget http://$SERVER/brewroot/packages/tuned/2.7.1/5.el7fdb/noarch/tuned-profiles-realtime-2.7.1-5.el7fdb.noarch.rpm -P /root/tuned/27/.
 wget http://$SERVER/brewroot/packages/tuned/2.8.0/2.el7fdp/noarch/tuned-2.8.0-2.el7fdp.noarch.rpm -P /root/tuned/28/.
 wget http://$SERVER/brewroot/packages/tuned/2.8.0/2.el7fdp/noarch/tuned-profiles-cpu-partitioning-2.8.0-2.el7fdp.noarch.rpm -P /root/tuned/28/.
+# DO NOT REMOVE THIS REQUIRED FOR PFT
 mkdir -p /root/dpdkrpms/1711-15
 wget http://$SERVER/brewroot/packages/dpdk/17.11/15.el7/x86_64/dpdk-17.11-15.el7.x86_64.rpm -P /root/dpdkrpms/1711-15/.
 wget http://$SERVER/brewroot/packages/dpdk/17.11/15.el7/x86_64/dpdk-tools-17.11-15.el7.x86_64.rpm -P /root/dpdkrpms/1711-15/.
+# DO NOT REMOVE THIS, REQUIRED for PFT
+mkdir -P /root/dpdkrpms/17-11-14
+wget http://$SERVER/brewroot/packages/dpdk/17.11/14.el8/x86_64/dpdk-17.11-14.el8.x86_64.rpm -P /root/dpdkrpms/17-11-14
+wget http://$SERVER/brewroot/packages/dpdk/17.11/14.el8/x86_64/dpdk-tools-17.11-14.el8.x86_64.rpm -P /root/dpdkrpms/17-11-14
 mkdir -P /root/dpdkrpms/1811-2
 wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el7_6/x86_64/dpdk-18.11-2.el7_6.x86_64.rpm -P /root/dpdkrpms/1811-2/.
 wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el7_6/x86_64/dpdk-tools-18.11-2.el7_6.x86_64.rpm -P /root/dpdkrpms/1811-2/.
