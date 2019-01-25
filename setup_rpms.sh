@@ -72,6 +72,9 @@ mkdir -p /root/dpdkrpms/1711-15
 wget http://$SERVER/brewroot/packages/dpdk/17.11/15.el7/x86_64/dpdk-17.11-15.el7.x86_64.rpm -P /root/dpdkrpms/1711-15/.
 wget http://$SERVER/brewroot/packages/dpdk/17.11/15.el7/x86_64/dpdk-tools-17.11-15.el7.x86_64.rpm -P /root/dpdkrpms/1711-15/.
 # DO NOT REMOVE THIS, REQUIRED for PFT
+mkdir -P /root/dpdkrpms/17-11-13
+wget http://$SERVER/brewroot/packages/dpdk/17.11/13.el7/x86_64/dpdk-17.11-13.el7.x86_64.rpm -P /root/dpdkrpms/17-11-13
+wget http://$SERVER/brewroot/packages/dpdk/17.11/13.el7/x86_64/dpdk-tools-17.11-13.el7.x86_64.rpm -P /root/dpdkrpms/17-11-13
 mkdir -P /root/dpdkrpms/17-11-14
 wget http://$SERVER/brewroot/packages/dpdk/17.11/14.el8/x86_64/dpdk-17.11-14.el8.x86_64.rpm -P /root/dpdkrpms/17-11-14
 wget http://$SERVER/brewroot/packages/dpdk/17.11/14.el8/x86_64/dpdk-tools-17.11-14.el8.x86_64.rpm -P /root/dpdkrpms/17-11-14
