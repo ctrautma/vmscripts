@@ -34,7 +34,7 @@ yum install -y nmap-ncat tcpdump
 yum install -y gcc-c++ make gcc
 
 # install python2 for dpdk bonding
-yum -y install python
+yum -y install python2
 
 netperf=netperf-2.6.0
 wget http://lacrosse.corp.redhat.com/~haliu/${netperf}.tar.gz -O /tmp/${netperf}.tar.gz
@@ -72,16 +72,16 @@ mkdir -p /root/dpdkrpms/1711-15
 wget http://$SERVER/brewroot/packages/dpdk/17.11/15.el7/x86_64/dpdk-17.11-15.el7.x86_64.rpm -P /root/dpdkrpms/1711-15/.
 wget http://$SERVER/brewroot/packages/dpdk/17.11/15.el7/x86_64/dpdk-tools-17.11-15.el7.x86_64.rpm -P /root/dpdkrpms/1711-15/.
 # DO NOT REMOVE THIS, REQUIRED for PFT
-mkdir -P /root/dpdkrpms/17-11-13
+mkdir -p /root/dpdkrpms/17-11-13
 wget http://$SERVER/brewroot/packages/dpdk/17.11/13.el7/x86_64/dpdk-17.11-13.el7.x86_64.rpm -P /root/dpdkrpms/17-11-13
 wget http://$SERVER/brewroot/packages/dpdk/17.11/13.el7/x86_64/dpdk-tools-17.11-13.el7.x86_64.rpm -P /root/dpdkrpms/17-11-13
-mkdir -P /root/dpdkrpms/17-11-14
+mkdir -p /root/dpdkrpms/17-11-14
 wget http://$SERVER/brewroot/packages/dpdk/17.11/14.el8/x86_64/dpdk-17.11-14.el8.x86_64.rpm -P /root/dpdkrpms/17-11-14
 wget http://$SERVER/brewroot/packages/dpdk/17.11/14.el8/x86_64/dpdk-tools-17.11-14.el8.x86_64.rpm -P /root/dpdkrpms/17-11-14
-mkdir -P /root/dpdkrpms/1811-2
+mkdir -p /root/dpdkrpms/1811-2
 wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el7_6/x86_64/dpdk-18.11-2.el7_6.x86_64.rpm -P /root/dpdkrpms/1811-2/.
 wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el7_6/x86_64/dpdk-tools-18.11-2.el7_6.x86_64.rpm -P /root/dpdkrpms/1811-2/.
-mkdir -P /root/dpdkrpms/el8-1811-2
+mkdir -p /root/dpdkrpms/el8-1811-2
 wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el8/x86_64/dpdk-18.11-2.el8.x86_64.rpm -P /root/dpdkrpms/el8-1811-2/.
 wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el8/x86_64/dpdk-tools-18.11-2.el8.x86_64.rpm -P /root/dpdkrpms/el8-1811-2/.
 
@@ -154,6 +154,7 @@ else
     fi
     systemctl start tuned
     sleep 10
+    echo -e "isolated_cores=$ISOLCPUS" >> /etc/tuned/cpu-partitioning-variables.conf
     tuned-adm profile cpu-partitioning
     #grub2-editenv - set kernelopts="$kernelopts iommu=on iommu=pt default_hugepagesz=1GB hugepagesz=1G hugepages=16"
     # to check
