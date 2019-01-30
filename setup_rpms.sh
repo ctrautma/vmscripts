@@ -33,31 +33,46 @@ yum install -y nmap-ncat tcpdump
 # netperf & iperf
 yum install -y gcc-c++ make gcc
 
-# install python2 for dpdk bonding
-yum -y install python2
 
-netperf=netperf-2.6.0
-wget http://lacrosse.corp.redhat.com/~haliu/${netperf}.tar.gz -O /tmp/${netperf}.tar.gz
-tar zxvf /tmp/${netperf}.tar.gz
-pushd ${netperf}
-# add support for IBM new system arch ppc64le
-sed -i "/ppc64/i\ppc64le:Linux:*:*)\n\ echo powerpc64le-unknown-linux-gnu\n\ exit ;;" config.guess
-./configure && make && make install
-popd
+. /etc/os-release
+rhel=$(echo $VERSION_ID | cut -d '.' -f 1)
 
-IPERF_FILE="iperf-2.0.5.tar.gz"
-wget http://lacrosse.corp.redhat.com/~haliu/${IPERF_FILE}
-tar xf ${IPERF_FILE}
-BUILD_DIR="${IPERF_FILE%.tar.gz}"
-cd ${BUILD_DIR}
-# add support for IBM new system arch ppc64le
-sed -i "/ppc64/i\ppc64le:Linux:*:*)\n\ echo powerpc64le-unknown-linux-gnu\n\ exit ;;" config.guess
-./configure && make && make install
+if [ $rhel == 8 ]; then
+    yum install -y http://download.eng.bos.redhat.com/brewroot/vol/rhel-8/packages/netperf/2.7.0/5.el8+5/x86_64/netperf-2.7.0-5.el8+5.x86_64.rpm
 
-rm -f ${IPERF_FILE}
-rm -Rf IPERF*
-rm -f ${netperf}.tar.gz
-rm -Rf netperf*
+    yum install -y iperf3
+else
+    # Install python2 for dpdk bonding
+    yum -y install python
+
+    # Install netperf
+    netperf=netperf-2.6.0
+    wget http://lacrosse.corp.redhat.com/~haliu/${netperf}.tar.gz -O /tmp/${netperf}.tar.gz
+    tar zxvf /tmp/${netperf}.tar.gz
+    pushd ${netperf}
+    # add support for IBM new system arch ppc64le
+    sed -i "/ppc64/i\ppc64le:Linux:*:*)\n\ echo powerpc64le-unknown-linux-gnu\n\ exit ;;" config.guess
+    ./configure && make && make install
+    popd
+
+    # Install iperf
+    IPERF_FILE="iperf-2.0.5.tar.gz"
+    wget http://lacrosse.corp.redhat.com/~haliu/${IPERF_FILE}
+    tar xf ${IPERF_FILE}
+    BUILD_DIR="${IPERF_FILE%.tar.gz}"
+    cd ${BUILD_DIR}
+    # add support for IBM new system arch ppc64le
+    sed -i "/ppc64/i\ppc64le:Linux:*:*)\n\ echo powerpc64le-unknown-linux-gnu\n\ exit ;;" config.guess
+    ./configure && make && make install
+    cd ..
+
+    #Cleanup directories
+    rm -f ${IPERF_FILE}
+    rm -Rf IPERF*
+    rm -f ${netperf}.tar.gz
+    rm -Rf netperf*
+fi
+
 
 # DPDK Rpms download and tuned profiles download
 SERVER="download-node-02.eng.bos.redhat.com"
