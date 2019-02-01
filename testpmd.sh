@@ -57,10 +57,18 @@ shift $(($OPTIND - 1))
 MASK=`seq -s, 0 $CPUS`
 
 set -x
-
+dpdk_ver=$(rpm -q dpdk | cut -d '-' -f 2 | cut -d '.' -f 1)
+if [ $dpdk_ver -eq 18 ]; then
+testpmd -l $MASK -n 4 $NICS -- --burst=64 -i \
+--rxd=$DESCRIPTORS --txd=$DESCRIPTORS \
+--nb-cores=$NBCORES --rxq=$QUEUES --txq=$QUEUES \
+--disable-rss --forward-mode=$FORWARD \
+$AUTOSTART
+else
 testpmd -l $MASK -n4 --socket-mem $MEMORY $NICS -- \
 --burst=64 -i --txqflags=0xf00 \
 --rxd=$DESCRIPTORS --txd=$DESCRIPTORS \
 --nb-cores=$NBCORES --rxq=$QUEUES --txq=$QUEUES \
 --disable-hw-vlan --disable-rss --forward-mode=$FORWARD \
 $AUTOSTART
+fi
