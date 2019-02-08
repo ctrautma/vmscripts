@@ -161,8 +161,9 @@ else
     kernelopts=$(grub2-editenv - list | grep kernelopts | cut -d '=' -f2-)
     # append
     if [ "$VIOMMU" == "NO" ]; then
-        grub2-editenv - set kernelopts="$kernelopts default_hugepagesz=1G hugepagesz=1G nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup"
-        #sed -i "s/GRUB_CMDLINE_LINUX.*/& default_hugepagesz=1G hugepagesz=1G nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup\"/g" /etc/default/grub
+        #grub2-editenv - set kernelopts="$kernelopts default_hugepagesz=1G hugepagesz=1G nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup"
+        grub2-editenv - set kernelopts="$kernelopts isolcpus=$ISOLCPUS default_hugepagesz=1G hugepagesz=1G hugepages=2"
+	#sed -i "s/GRUB_CMDLINE_LINUX.*/& default_hugepagesz=1G hugepagesz=1G nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup\"/g" /etc/default/grub
     elif [ "$VIOMMU" == "YES" ]; then
         grub2-editenv - set kernelopts="$kernelopts default_hugepagesz=1G hugepagesz=1G intel_iommu=on nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup"
         #sed -i "s/GRUB_CMDLINE_LINUX.*/& default_hugepagesz=1G hugepagesz=1G intel_iommu=on nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup\"/g" /etc/default/grub
