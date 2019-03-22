@@ -100,6 +100,14 @@ mkdir -p /root/dpdkrpms/el8-1811-2
 wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el8/x86_64/dpdk-18.11-2.el8.x86_64.rpm -P /root/dpdkrpms/el8-1811-2/.
 wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el8/x86_64/dpdk-tools-18.11-2.el8.x86_64.rpm -P /root/dpdkrpms/el8-1811-2/.
 
+mkdir -p /root/dpdkrpms/1811-4
+wget http://$SERVER/brewroot/packages/dpdk/18.11/4.el7_6/x86_64/dpdk-18.11-4.el7_6.x86_64.rpm -P /root/dpdkrpms/1811-4/.
+wget http://$SERVER/brewroot/packages/dpdk/18.11/4.el7_6/x86_64/dpdk-tools-18.11-4.el7_6.x86_64.rpm -P /root/dpdkrpms/1811-4/.
+mkdir -p /root/dpdkrpms/el8-1811-4
+wget http://$SERVER/brewroot/packages/dpdk/18.11/4.el8/x86_64/dpdk-18.11-4.el8.x86_64.rpm -P /root/dpdkrpms/el8-1811-4/.
+wget http://$SERVER/brewroot/packages/dpdk/18.11/4.el8/x86_64/dpdk-tools-18.11-4.el8.x86_64.rpm -P /root/dpdkrpms/el8-1811-4/.
+
+
 if [ "$DPDK_BUILD" == "YES" ]
 then
     # install upstream dpdk version
