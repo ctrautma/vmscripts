@@ -100,6 +100,10 @@ mkdir -p /root/dpdkrpms/el8-1811-2
 wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el8/x86_64/dpdk-18.11-2.el8.x86_64.rpm -P /root/dpdkrpms/el8-1811-2/.
 wget http://$SERVER/brewroot/packages/dpdk/18.11/2.el8/x86_64/dpdk-tools-18.11-2.el8.x86_64.rpm -P /root/dpdkrpms/el8-1811-2/.
 
+mkdir -p /root/dpdkrpms/el8-1811-2-3
+wget http://$SERVER/brewroot/packages/dpdk/18.11.2/3.el8/x86_64/dpdk-18.11.2-3.el8.x86_64.rpm -P /root/dpdkrpms/el8-1811-2-3/.
+wget http://$SERVER/brewroot/packages/dpdk/18.11.2/3.el8/x86_64/dpdk-tools-18.11.2-3.el8.x86_64.rpm -P /root/dpdkrpms/el8-1811-2-3/.
+
 mkdir -p /root/dpdkrpms/1811-4
 wget http://$SERVER/brewroot/packages/dpdk/18.11/4.el7_6/x86_64/dpdk-18.11-4.el7_6.x86_64.rpm -P /root/dpdkrpms/1811-4/.
 wget http://$SERVER/brewroot/packages/dpdk/18.11/4.el7_6/x86_64/dpdk-tools-18.11-4.el7_6.x86_64.rpm -P /root/dpdkrpms/1811-4/.
@@ -114,6 +118,10 @@ wget http://$SERVER/brewroot/packages/dpdk/18.11/8.el8/x86_64/dpdk-tools-18.11-8
 mkdir -p /root/dpdkrpms/el8-1911-2
 wget http://$SERVER/brewroot/packages/dpdk/19.11/2.el8/x86_64/dpdk-19.11-2.el8.x86_64.rpm -P /root/dpdkrpms/el8-1911-2/.
 wget http://$SERVER/brewroot/packages/dpdk/19.11/2.el8/x86_64/dpdk-tools-19.11-2.el8.x86_64.rpm -P /root/dpdkrpms/el8-1911-2/.
+
+mkdir -p /root/dpdkrpms/el8-1911-4
+wget http://$SERVER/brewroot/packages/dpdk/19.11/4.el8/x86_64/dpdk-19.11-4.el8.x86_64.rpm -P /root/dpdkrpms/el8-1911-4/.
+wget http://$SERVER/brewroot/packages/dpdk/19.11/4.el8/x86_64/dpdk-tools-19.11-4.el8.x86_64.rpm -P /root/dpdkrpms/el8-1911-4/.
 
 if [ "$DPDK_BUILD" == "YES" ]
 then
