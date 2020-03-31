@@ -64,6 +64,12 @@ testpmd -l $MASK -n 4 $NICS -- --burst=64 -i \
 --nb-cores=$NBCORES --rxq=$QUEUES --txq=$QUEUES \
 --disable-rss --forward-mode=$FORWARD \
 $AUTOSTART
+elif [ $dpdk_ver -eq 19 ]; then
+testpmd -l $MASK -n 4 $NICS -- --burst=64 -i \
+--rxd=$DESCRIPTORS --txd=$DESCRIPTORS \
+--nb-cores=$NBCORES \
+--disable-rss --forward-mode=$FORWARD \
+$AUTOSTART
 else
 testpmd -l $MASK -n4 --socket-mem $MEMORY $NICS -- \
 --burst=64 -i --txqflags=0xf00 \
