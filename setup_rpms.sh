@@ -127,6 +127,11 @@ mkdir -p /root/dpdkrpms/el8-19112
 wget http://$SERVER/brewroot/packages/dpdk/19.11.2/1.el8/x86_64/dpdk-19.11.2-1.el8.x86_64.rpm -P /root/dpdkrpms/el8-19112/.
 wget http://$SERVER/brewroot/packages/dpdk/19.11.2/1.el8/x86_64/dpdk-tools-19.11.2-1.el8.x86_64.rpm -P /root/dpdkrpms/el8-19112/.
 
+mkdir -p /root/dpdkrpms/el8-19113
+wget http://$SERVER/brewroot/packages/dpdk/19.11.3/1.el8/x86_64/dpdk-19.11.3-1.el8.x86_64.rpm -P /root/dpdkrpms/el8-19113/.
+wget http://$SERVER/brewroot/packages/dpdk/19.11.3/1.el8/x86_64/dpdk-tools-19.11.3-1.el8.x86_64.rpm -P /root/dpdkrpms/el8-19113/.
+
+
 
 if [ "$DPDK_BUILD" == "YES" ]
 then
