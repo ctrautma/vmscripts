@@ -33,6 +33,7 @@ yum install -y nmap-ncat tcpdump
 # netperf & iperf
 yum install -y gcc-c++ make gcc
 
+rpm -q grubby || yum -y install grubby
 
 . /etc/os-release
 rhel=$(echo $VERSION_ID | cut -d '.' -f 1)
@@ -197,15 +198,20 @@ then
     tuned-adm profile cpu-partitioning
 else
     # to save the old options, and remove
-    kernelopts=$(grub2-editenv - list | grep kernelopts | cut -d '=' -f2-)
+    # kernelopts=$(grub2-editenv - list | grep kernelopts | cut -d '=' -f2-)
+    default_kernel=$(grubby --default-kernel)
     # append
     if [ "$VIOMMU" == "NO" ]; then
         #grub2-editenv - set kernelopts="$kernelopts default_hugepagesz=1G hugepagesz=1G nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup"
-        grub2-editenv - set kernelopts="$kernelopts isolcpus=$ISOLCPUS default_hugepagesz=1G hugepagesz=1G hugepages=2"
+        # grub2-editenv - set kernelopts="$kernelopts isolcpus=$ISOLCPUS default_hugepagesz=1G hugepagesz=1G hugepages=2"
+        grubby --args="isolcpus=$ISOLCPUS default_hugepagesz=1G hugepagesz=1G hugepages=2" --update-kernel ${default_kernel}
+        grubby --info=ALL
+
 	#sed -i "s/GRUB_CMDLINE_LINUX.*/& default_hugepagesz=1G hugepagesz=1G nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup\"/g" /etc/default/grub
     elif [ "$VIOMMU" == "YES" ]; then
-        grub2-editenv - set kernelopts="$kernelopts default_hugepagesz=1G hugepagesz=1G intel_iommu=on iommu=pt nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup"
+        # grub2-editenv - set kernelopts="$kernelopts default_hugepagesz=1G hugepagesz=1G intel_iommu=on iommu=pt nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup"
         #sed -i "s/GRUB_CMDLINE_LINUX.*/& default_hugepagesz=1G hugepagesz=1G intel_iommu=on nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup\"/g" /etc/default/grub
+        grubby --args="default_hugepagesz=1G hugepagesz=1G intel_iommu=on iommu=pt nohz=on nohz_full=$ISOLCPUS rcu_nocbs=$ISOLCPUS tuned.non_isolcpus=00000001 intel_pstate=disable nosoftlockup" --update-kernel ${default_kernel}
     fi
     systemctl start tuned
     sleep 10
