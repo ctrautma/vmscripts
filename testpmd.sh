@@ -70,7 +70,7 @@ testpmd -l $MASK -n 4 $NICS -- --burst=64 -i \
 --nb-cores=$NBCORES \
 --disable-rss --forward-mode=$FORWARD \
 $AUTOSTART
-elif [ $dpdk_ver -eq 20 ]; then
+elif [ $dpdk_ver -ge 20 ]; then
 dpdk-testpmd -l $MASK -n 4 $NICS -- --burst=64 -i \
 --rxd=$DESCRIPTORS --txd=$DESCRIPTORS \
 --nb-cores=$NBCORES \
